@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                 .headers(headers -> headers.frameOptions().disable())
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers(UNSECURED_ENDPOINT).permitAll()
+                                .requestMatchers("/login/**").permitAll()
                                 .anyRequest().authenticated()
 
                 )
