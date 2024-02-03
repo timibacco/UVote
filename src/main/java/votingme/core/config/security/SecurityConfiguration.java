@@ -30,12 +30,13 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions().disable())
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers(UNSECURED_ENDPOINT ).permitAll()
+                        auth -> auth.requestMatchers(UNSECURED_ENDPOINT).permitAll()
                                 .anyRequest().authenticated()
+
                 )
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
                 .authenticationProvider(authenticationProvider)
+
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

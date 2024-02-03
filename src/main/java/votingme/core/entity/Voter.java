@@ -25,6 +25,8 @@ public class Voter {
 
     private Boolean has_voted;
 
+
+    private boolean isActive;
     public Boolean hasVoted() {
     	return has_voted;
     }
