@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         auth -> auth.requestMatchers(UNSECURED_ENDPOINT).permitAll()
                                 .anyRequest().authenticated()
+                                .requestMatchers("/login/**").permitAll()
 
                 )
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
