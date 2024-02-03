@@ -1,6 +1,5 @@
 package votingme.core.service;
 
-import me.iyanuadelekan.paystackjava.core.Customers;
 import org.springframework.scheduling.annotation.Scheduled;
 public class ScheduledService {
 
