@@ -1,4 +1,5 @@
 package votingme.core.entity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import votingme.core.enums.UserType;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 
 @Data
@@ -28,7 +29,7 @@ public class User implements UserDetails {
     private String firstname;
     private String lastname;
 
-    private Set<UserType> type;
+    private List<UserType> type;
 
 
     @Override

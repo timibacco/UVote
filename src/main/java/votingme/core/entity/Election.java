@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 
 @Data
@@ -30,18 +30,22 @@ public class Election {
     @Column(name = "end_date", nullable = false)
     private LocalDateTime end_date;
 
-    private Set<Organizer> organizers;
 
-    private Set<Voter> voters;
+    @ManyToMany
+    private List<Organizer> organizers;
 
-    private Set<Candidate> candidates;
+    @ManyToMany(mappedBy = "election")
+     private List<Voter> voters;
 
-    private Boolean is_active;
+    @ManyToMany(mappedBy = "election")
+    private List<Candidate> candidates;
+
+    private Boolean isActive;
 
 
-    private Boolean is_public;
+    private Boolean isPublic;
 
     public Boolean isActive() {
-    	return is_active;
+    	return this.isActive;
     }
 }

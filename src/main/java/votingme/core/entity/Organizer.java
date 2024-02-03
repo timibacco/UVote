@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @RequiredArgsConstructor
@@ -18,8 +20,8 @@ public class Organizer {
     @PrimaryKeyJoinColumn
     private User user;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "election_id", nullable = false)
-    private Election election;
+    private List<Election> election;
 
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Data
 @RequiredArgsConstructor
 @Entity
@@ -17,6 +19,7 @@ public class Candidate {
     @PrimaryKeyJoinColumn(referencedColumnName = "id")
     private User user;
 
-    private Election election;
+    @ManyToMany
+    private List<Election> election;
 
 }
