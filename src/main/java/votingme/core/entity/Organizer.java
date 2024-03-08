@@ -17,11 +17,10 @@ public class Organizer {
     @GeneratedValue
     private Long id;
 
-    @PrimaryKeyJoinColumn
+    @OneToOne
     private User user;
 
-    @ManyToMany
-    @JoinColumn(name = "election_id", nullable = false)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Election> election;
 
 }

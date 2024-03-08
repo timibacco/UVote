@@ -16,10 +16,10 @@ public class Candidate {
     private Long id;
 
 
-    @PrimaryKeyJoinColumn(referencedColumnName = "id")
+    @OneToOne
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Election> election;
 
 }
