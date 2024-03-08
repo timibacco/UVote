@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import votingme.core.repository.UserRepository;
+import static  votingme.core.utils.Endpoints.UNSECURED_ENDPOINT;
 
 @Configuration
 @EnableWebSecurity
@@ -28,14 +29,21 @@ public class SecurityConfiguration {
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+                .authorizeHttpRequests(auth ->
+                        auth
+                                .requestMatchers(UNSECURED_ENDPOINT).permitAll()
+                                .anyRequest().authenticated()
+
+                )
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/dashboard", true)
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
                 .permitAll();
 
         return http.build();
