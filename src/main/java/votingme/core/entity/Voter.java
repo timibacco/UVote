@@ -17,17 +17,17 @@ public class Voter {
     private Long id;
 
 
-    @PrimaryKeyJoinColumn(referencedColumnName = "id")
+    @OneToOne
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Election election;
 
-    private Boolean has_voted;
+    private boolean has_voted;
 
 
     private boolean isActive;
-    public Boolean hasVoted() {
+    public boolean hasVoted() {
     	return has_voted;
     }
 

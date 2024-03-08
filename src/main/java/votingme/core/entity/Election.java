@@ -31,21 +31,21 @@ public class Election {
     private LocalDateTime end_date;
 
 
-    @ManyToMany
+    @ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Organizer> organizers;
 
     @ManyToMany(mappedBy = "election")
      private List<Voter> voters;
 
-    @ManyToMany(mappedBy = "election")
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Candidate> candidates;
 
-    private Boolean isActive;
+    private boolean isActive;
 
 
-    private Boolean isPublic;
+    private boolean isPublic;
 
-    public Boolean isActive() {
+    public boolean isActive() {
     	return this.isActive;
     }
 }

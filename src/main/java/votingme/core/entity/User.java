@@ -8,10 +8,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import votingme.core.enums.UserType;
 
 import java.util.Collection;
-import java.util.List;
 
 
 @Data
@@ -29,7 +27,8 @@ public class User implements UserDetails {
     private String firstname;
     private String lastname;
 
-    private List<UserType> type;
+////    private List<UserType> type;
+//    }
 
 
     @Override
