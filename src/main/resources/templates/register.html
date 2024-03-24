@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Join Our Community</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <style>
@@ -47,6 +47,10 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+
+            background-color: rgba(255, 255, 255, 0.5); /* white with 50% opacity */
+            /* rest of your styles */
+        }
         }
         .error {
             color: #dc3545; /* shade of red */
@@ -62,6 +66,16 @@
             height: 100%;
             z-index: -1;
         }
+        #spinner {
+              display: none;  /* Hidden by default */
+              position: fixed; /* Fixed position */
+              z-index: 9999; /* Sit on top */
+              left: 50%; /* Center the loader horizontally */
+              top: 50%; /* Center the loader vertically */
+              transform: translate(-50%, -50%); /* Compensate for the dimensions of the spinner */
+            }
+
+
         @keyframes fading {
             0% {background-image: url('images/image1.jpeg');}
             33% {background-image: url('images/image2.jpeg');}
@@ -79,13 +93,25 @@
             color: #2d3748; /* dark gray */
         }
 
+        .loader {
+              border: 16px solid #f3f3f3; /* Light grey */
+              border-top: 16px solid #3498db; /* Blue */
+              border-radius: 50%;
+              width: 120px;
+              height: 120px;
+              animation: spin 2s linear infinite;
+            }
+
+        @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+
 
     </style>
 </head>
 <body>
-<div id="loading" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
-    <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-</div>
+
 <div class="fading-background"></div>
 <div class="container register-container">
     <div class="panel register-panel">
@@ -93,19 +119,27 @@
             <h2>Join Our Community</h2>
         </div>
         <div class="panel-body">
-            <form id="registerForm" method="post" action="/register">
+            <form id="registerForm" method="post" th:action="@{/register/save}" th:object="${user}">
+
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        You have successfully registered in our app!
+                    </div>
+                    </div>
                 <!-- Add your form fields here -->
+                <div class="loader"></div>
+
                 <div class="form-group">
                     <label for="username">Full Name</label>
-                    <input type="text" class="form-control" id="username" name="fullname" placeholder="Choose a unique username" required>
+                    <input th:field="*{fullname}" type="text" class="form-control" id="username" name="fullname" placeholder="Choose a unique username" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your valid email address" required>
+                    <input th:field="*{email}" type="email" class="form-control" id="email" name="email" placeholder="Enter your valid email address" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Choose a strong password" required>
+                    <input th:field="*{password}" type="password" class="form-control" id="password" name="password" placeholder="Choose a strong password" required>
                 </div>
                 <div class="form-group">
                     <label for="confirm-password">Confirm Password</label>
@@ -115,75 +149,104 @@
                     <input type="checkbox" class="form-check-input" id="terms" name="termsAgreed" required>
                     <label class="form-check-label" for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
                 </div>
+
+
                 <button type="submit" class="btn btn-primary btn-block">
                     Create Account
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                    <span id="submit-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
                 </button>
             </form>
             <div class="login-links text-center">
-                <a href="/login">Already have an account? Sign in here</a>
+                <a th:href="@{/login}">Already have an account? Sign in here</a>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="check-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zm3.97-9.97a.75.75 0 0 0-1.07-1.07L7.5 10.292 5.781 8.573a.75.75 0 0 0-1.062 1.06l2.5 2.5a.75.75 0 0 0 1.06 0l4.5-4.5z"/>
+                    </svg>
+                </div>
+                <p>A verification email has been sent.</p>
+            </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
-<!--     setTimeout(function() {-->
-<!--           $('#loading').fadeOut('slow', function() {-->
-<!--               $(this).remove();-->
-<!--           });-->
-<!--         }, 400);-->
-<!--         });-->
-     $('#registerForm').validate({
-         rules: {
-             username: {
-                 required: true,
-                 minlength: 5
-             },
-             email: {
-                 required: true,
-                 email: true
-             },
-             password: {
-                 required: true,
-                 minlength: 8
-             },
-             confirmPassword: {
-                 required: true,
-                 equalTo: "#password"
-             },
-             termsAgreed: {
-                 required: true
-             }
-         },
-         messages: {
-             username: {
-                 required: "Please enter your username",
-                 minlength: "Your username must be at least 5 characters long"
-             },
-             email: {
-                 required: "Please enter your email",
-                 email: "Please enter a valid email address"
-             },
-             password: {
-                 required: "Please enter your password",
-                 minlength: "Your password must be at least 8 characters long"
-             },
-             confirmPassword: {
-                 required: "Please confirm your password",
-                 equalTo: "Your passwords do not match"
-             },
-             termsAgreed: {
-                 required: "Please agree to the terms and conditions"
-             }
-         },
-         submitHandler: function(form) {
-           $(form).find('.spinner-border').show();
-             form.submit();
-         }
-     });
+        $("#registerForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 5
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8
+                },
+                confirmPassword: {
+                    required: true,
+                    equalTo: "#password"
+                },
+                termsAgreed: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: "Please enter your username",
+                    minlength: "Your username must be at least 5 characters long"
+                },
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                password: {
+                    required: "Please enter your password",
+                    minlength: "Your password must be at least 8 characters long"
+                },
+                confirmPassword: {
+                    required: "Please confirm your password",
+                    equalTo: "Your passwords do not match"
+                },
+                termsAgreed: {
+                    required: "Please agree to the terms and conditions"
+                }
+            },
+          // Submit the form using AJAX
+          submitHandler: function(form) {
+            $.ajax({
+                type: $(form).attr('method'),
+                url: $(form).attr('action'),
+                data: $(form).serialize(),
+                success: function() {
+                    // Show the success modal
+                    $('#successModal').modal('show');
+                }
+            });
+            // Prevent the form from actually submitting
+            return false;
+            };
 
- });
+        });
+    });
 </script>
 </body>
 </html>

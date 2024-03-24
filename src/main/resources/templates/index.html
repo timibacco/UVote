@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>VoteX</title>
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -73,7 +73,7 @@
             <h2 class="text-3xl text-white font-bold mb-4">Ready to Revolutionize the Way You Vote?</h2>
             <p class="text-lg text-white mb-8">Join the movement with VoteX today!</p>
             <div class="flex justify-center">
-                <a href="/register">
+                <a href="register">
                 <button class="bg-white text-blue-500 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-700 hover:text-white" >Register Now</button>
                 </a>
             </div>
@@ -95,30 +95,29 @@
 </div>
 
 <script>
-    // Fading background
-    var images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    var i = 0;
-
-    setInterval(function() {
-        $('#fading-background').fadeOut(1000, function() {
-            $(this).css('background-image', 'url(' + images[i] + ')').fadeIn(1000);
-        });
-        if (i == images.length - 1) {
-            i = 0;
-        } else {
-            i++;
-        }
-    }, 5000);
 
     // Loading animation
-    $(window).on('load', function() {
-        //setTimeout(removeLoader, 2000); wait for page load PLUS two seconds.
+    $(document).ready(function() {
        setTimeout(function() {
            $('#loading').fadeOut('slow', function() {
                $(this).remove();
            });
          }, 2000);
     });
+
+// Error handler
+$(window).on('error', function() {
+    $('#loading').fadeOut('slow', function() {
+        $(this).remove();
+    });
+});
+
+// Timeout
+setTimeout(function() {
+    $('#loading').fadeOut('slow', function() {
+        $(this).stop();
+    });
+}, 10000); // 10 seconds
 </script>
 </body>
 </html>
