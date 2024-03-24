@@ -1,15 +1,17 @@
 package votingme.core.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -19,26 +21,39 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Email(message = "Email cannot be empty", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
     private String firstname;
     private String lastname;
 
-////    private List<UserType> type;
-//    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Role> roles = new ArrayList<>();
+
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorities = new ArrayList<>();
+       return roles
+               .stream()
+               .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+               .collect(Collectors.toList());
+
+
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

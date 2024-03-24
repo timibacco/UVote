@@ -8,9 +8,8 @@ import votingme.core.dto.LoginDTO;
 import votingme.core.dto.UserDTO;
 import votingme.core.dto.UserResponseDTO;
 
-@Service
 public interface UserService {
-    String createUser(UserDTO userDto, String siteURL, HttpServletRequest request) throws Exception;
+    void createOrganizer(UserDTO userDto, HttpServletRequest request) throws Exception;
     Page<UserResponseDTO> getAllUsers(Pageable pageable);
     UserResponseDTO getUserById(Long id) throws Exception;
     String updateUser(Long id, UserDTO userDto) throws Exception;
