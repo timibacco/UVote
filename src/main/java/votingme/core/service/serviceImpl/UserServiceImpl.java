@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public  Object getAllUsers(Pageable pageable) {
-        var users =   userRepository.findAll(); 
+        var users =   userRepository.findAll();
 
 
         return PageableExecutionUtils.getPage(users, pageable, users::size);
