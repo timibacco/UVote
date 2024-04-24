@@ -2,7 +2,6 @@ package votingme.core.service.serviceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import votingme.core.dto.LoginDTO;
 import votingme.core.dto.UserDTO;
-import votingme.core.dto.UserResponseDTO;
+
 import votingme.core.entity.Role;
 import votingme.core.entity.User;
 import votingme.core.enums.UserType;
