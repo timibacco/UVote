@@ -9,11 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import votingme.core.dto.LoginDTO;
 import votingme.core.dto.UserDTO;
-
 import votingme.core.entity.Role;
 import votingme.core.entity.User;
 import votingme.core.enums.UserType;
-import votingme.core.repository.RoleRepository;
 import votingme.core.repository.UserRepository;
 import votingme.core.service.UserService;
 
@@ -25,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final RoleRepository roleRepository;
 
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
