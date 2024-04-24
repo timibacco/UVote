@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
 
 
@@ -61,14 +61,22 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    //TODO: implement pagination
+
+    
+
     @Override
-    public Page<UserResponseDTO> getAllUsers(Pageable pageable) {
-        return null;
+    public  Object getAllUsers(Pageable pageable) {
+        var users =   userRepository.findAll();
+
+
+        return PageableExecutionUtils.getPage(users, pageable, users::size);
+
     }
 
     @Override
-    public UserResponseDTO getUserById(Long id) throws Exception {
-        return null;
+    public Object getUserById(Long id) throws Exception {
+        return userRepository.findById(id);
     }
 
     @Override
