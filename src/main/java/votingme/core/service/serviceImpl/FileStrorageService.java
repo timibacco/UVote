@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 import votingme.core.exceptions.StorageException;
 import votingme.core.exceptions.StorageFileNotFoundException;
@@ -86,7 +87,15 @@ public class FileStrorageService implements StorageService {
 
     @Override
     public Stream<Path> loadAll() {
-        return Stream.empty();
+        try
+        {
+            return Files.walk(this.rootLocation,1)
+                    .filter(path -> !path.equals(this.rootLocation))
+                    .map(this.rootLocation::relativize);
+        }catch(IOException ex) {
+            log.error("Failed to read stored files: ", ex);
+            throw new StorageException("Cannot fetch stored files");
+        }
     }
 
     @Override
@@ -120,6 +129,7 @@ public class FileStrorageService implements StorageService {
 
     @Override
     public void deleteAll() {
+        FileSystemUtils.deleteRecursively(rootLocation.toFile());
 
     }
 
