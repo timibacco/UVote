@@ -1,8 +1,12 @@
 package votingme.core.utils;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Setter
+@Getter
 @ConfigurationProperties("storage")
 public class Storage {
 
@@ -14,11 +18,4 @@ public class Storage {
     private String directory = "UPLOAD_DIR";
 
 
-    public String getDirectory(){
-        return directory;
-    }
-
-    public void setDirectory(String directory){
-        this.directory = directory;
-    }
 }

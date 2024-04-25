@@ -10,7 +10,7 @@ import votingme.core.service.OnboardingService;
 public class OnboardingServiceImpl implements OnboardingService {
 
 
-    @Autowired
+
 
 
 
