@@ -15,16 +15,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${userPage.content}">
-            <td class="border px-4 py-2" th:text="${user.email}"></td>
-            <td class="border px-4 py-2" th:text="${user.firstname}"></td>
+        <tr th:each="participantRepository : ${userPage.content}">
+            <td class="border px-4 py-2" th:text="${participantRepository.email}"></td>
+            <td class="border px-4 py-2" th:text="${participantRepository.firstname}"></td>
             <!-- Add more cells as needed -->
         </tr>
         </tbody>
     </table>
     <div class="flex justify-center mt-4">
-        <a th:if="${currentPage > 1}" th:href="@{/users(page=${currentPage - 1})}" class="mx-1 px-4 py-2 bg-blue-500 text-white rounded">Previous</a>
-        <a th:if="${userPage.totalPages > currentPage}" th:href="@{/users(page=${currentPage + 1})}" class="mx-1 px-4 py-2 bg-blue-500 text-white rounded">Next</a>
+        <a th:if="${currentPage > 1}" th:href="@{/participants(page=${currentPage - 1})}" class="mx-1 px-4 py-2 bg-blue-500 text-white rounded">Previous</a>
+        <a th:if="${userPage.totalPages > currentPage}" th:href="@{/participants(page=${currentPage + 1})}" class="mx-1 px-4 py-2 bg-blue-500 text-white rounded">Next</a>
     </div>
 </div>
 </body>

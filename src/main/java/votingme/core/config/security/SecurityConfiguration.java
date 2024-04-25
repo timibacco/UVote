@@ -13,7 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import votingme.core.repository.UserRepository;
+import votingme.core.repository.ParticipantRepository;
+
 import static  votingme.core.utils.Endpoints.UNSECURED_ENDPOINT;
 
 @Configuration
@@ -22,7 +23,7 @@ import static  votingme.core.utils.Endpoints.UNSECURED_ENDPOINT;
 public class SecurityConfiguration {
 
 
-    private final UserRepository repository;
+    private final ParticipantRepository repository;
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -58,7 +59,7 @@ public class SecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("ParticipantRepository not found"));
     }
 
 

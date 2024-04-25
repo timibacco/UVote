@@ -102,8 +102,8 @@
               border: 16px solid #f3f3f3; /* Light grey */
               border-top: 16px solid #3498db; /* Blue */
               border-radius: 50%;
-              width: 120px;
-              height: 120px;
+              width: 30px;
+              height: 30px;
               animation: spin 2s linear infinite;
             }
 
@@ -124,7 +124,7 @@
             <h2>Be the Change</h2>
         </div>
         <div class="panel-body">
-            <form id="registerForm" method="post" th:action="@{/register/save}" th:object="${user}">
+            <form id="registerForm" method="post" th:action="@{/register/save}" th:object="${participantRepository}">
 
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
@@ -256,7 +256,7 @@
 </script>
 <script>
     function onSignIn(googleUser) {
-      // Get the user's ID token and basic profile information
+      // Get the participantRepository's ID token and basic profile information
       var profile = googleUser.getBasicProfile();
       var id_token = googleUser.getAuthResponse().id_token;
   

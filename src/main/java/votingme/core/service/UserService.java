@@ -7,10 +7,10 @@ import votingme.core.dto.UserDTO;
 
 public interface UserService {
     void createOrganizer(UserDTO userDto, HttpServletRequest request) throws Exception;
-    Object getAllUsers(Pageable pageable);
-    Object getUserById(Long id) throws Exception;
-    String updateUser(Long id, UserDTO userDto) throws Exception;
-    String deleteUser(Long id) throws Exception;
+    Object getAllParticipants(Pageable pageable);
+    Object getParticipantById(Long id) throws Exception;
+    String updateParticipant(Long id, UserDTO userDto) throws Exception;
+    String deleteParticipant(Long id) throws Exception;
     String login(LoginDTO loginDTO) throws Exception;
 
 }

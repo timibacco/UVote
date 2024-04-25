@@ -5,5 +5,6 @@ public enum UserType {
     VOTER,
     ORGANIZER,
     ADMIN,
-    CANDIDATE;
+    CANDIDATE,
+    OBSERVER;
 }

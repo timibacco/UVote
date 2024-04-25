@@ -5,14 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import votingme.core.repository.UserRepository;
+import votingme.core.repository.ParticipantRepository;
 
 import java.util.regex.Pattern;
 
 public class Request {
 
     @Autowired
-    private UserRepository userRepository;
+    private ParticipantRepository participantRepository;
 
 
 
