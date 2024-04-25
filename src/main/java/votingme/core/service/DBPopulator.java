@@ -27,7 +27,9 @@ public class DBPopulator {
         TypeReference<List<votingme.core.entity.Participant>> typeReference = new TypeReference<>() {
         };
 
-        ClassPathResource resource = new ClassPathResource("users.json");
+
+            ClassPathResource resource = new ClassPathResource("users.json");
+
         try (InputStream inputStream = resource.getInputStream()) {
             List<votingme.core.entity.Participant> participants = objectMapper.readValue(inputStream, typeReference);
             for (votingme.core.entity.Participant participant : participants) {
@@ -39,4 +41,5 @@ public class DBPopulator {
             e.printStackTrace();
         }
     }
-}
+    }
+
