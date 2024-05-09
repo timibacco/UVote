@@ -57,12 +57,12 @@ public class Auth {
 
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-
-        return "dashboard";
-
-    }
+//    @GetMapping("/dashboard")
+//    public String dashboard(Model model) {
+//
+//        return "dashboard";
+//
+//    }
 
     @GetMapping("/login")
     public String login(Model model) {

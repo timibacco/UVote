@@ -13,7 +13,7 @@ public interface ElectionRepository extends JpaRepository<Election, Long> {
 
     List<Election> findAllByIsActiveTrueAndIsPublicTrue();
 
-    List<Election> findByOrganizers(List<Organizer> organizer);
+    List<Election> findByOrganizers(Organizer organizer);
 }
 
 

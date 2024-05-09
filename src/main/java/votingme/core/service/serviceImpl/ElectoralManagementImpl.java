@@ -8,7 +8,6 @@ import votingme.core.repository.ParticipantRepository;
 import votingme.core.service.ElectoralManagement;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Service
@@ -149,11 +148,10 @@ public class ElectoralManagementImpl implements ElectoralManagement{
     }
 
     public Object getMyElections(Long OrganizerID) {
-        return electionRepository.findByOrganizers(
-                List.of(organizerRepository.findById(OrganizerID)
+        return electionRepository.findByOrganizers(organizerRepository.findById(OrganizerID)
                         .orElseThrow(
                                 () -> new RuntimeException("Organizer not found")
                         )
-                ));
+                );
     }
 }
