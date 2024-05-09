@@ -1,10 +1,10 @@
 package votingme.core.entity;
 
 import jakarta.persistence.*;
-
-
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -20,16 +20,16 @@ public class Voter {
     @OneToOne
     private Participant participant;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Election election;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Election> election;
 
-    private boolean has_voted;
+    private boolean hasVoted;
 
 
     private boolean isActive;
-    public boolean hasVoted() {
-    	return has_voted;
-    }
+
+
+    private boolean canVote;
 
 
 

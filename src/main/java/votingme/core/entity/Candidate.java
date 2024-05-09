@@ -22,4 +22,7 @@ public class Candidate {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Election> election;
 
+
+    private boolean hasVoted;
+
 }

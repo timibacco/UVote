@@ -41,8 +41,16 @@ public class UserServiceImpl implements UserService {
         participant.setEmail(userDto.getEmail());
 
 
-        participant.setFirstname(userDto.getFirstName());
-        participant.setLastname(userDto.getLastName());
+
+        if (userDto.getFullname().length() > 1){
+            String[] fullname = userDto.getFullname().split(" ");
+            participant.setFirstname(fullname[0]);
+            participant.setLastname(fullname[1]);
+        } else {
+            participant.setFirstname(userDto.getFullname());
+        }
+
+
         participant.setPassword(encoder.encode(userDto.getPassword()));
 
         role.setName(UserType.ORGANIZER);
@@ -54,6 +62,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
+//    public void createParticipant(UserDTO userDto,HttpServletRequest request) throws Exception {
+//    } //TODO: A voter's account should be created when creating a participant.
 
     
 

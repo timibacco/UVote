@@ -40,7 +40,7 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="file">Select file:</label>
                 <input type="file" id="file" name="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-bs-toggle="modal" data-bs-target="#statusSuccessModal">Upload</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-bs-toggle="modal">Upload</button>
         </form>
 
         <div class="modal fade" id="statusSuccessModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -53,7 +53,22 @@
                         </svg>
                         <h4 class="text-success mt-3">Oh Yeah!</h4>
                         <p class="mt-3">Congratulations!You have successfully uploaded.</p>
-                        <button type="button" class="btn btn-sm mt-3 btn-success" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="statusErrorsModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center p-lg-4">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                            <circle class="path circle" fill="none" stroke="#db3646" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                            <line class="path line" fill="none" stroke="#db3646" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                            <line class="path line" fill="none" stroke="#db3646" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" X2="34.4" y2="92.2" />
+                        </svg>
+                        <h4 class="text-danger mt-3">Invalid</h4>
+                        <p class="mt-3">Error uploading file...wait while we retry</p>
+                        <button type="button" class="btn btn-sm mt-3 btn-danger" data-bs-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>
@@ -66,54 +81,46 @@
     </main>
 
 <script>
-<!--    $(document).ready(function() {-->
-<!--        $('form').on('submit', function(e) {-->
-<!--            e.preventDefault();-->
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault();
 
-<!--            var formData = new FormData(this);-->
-<!--            $.ajax({-->
-<!--                xhr: function() {-->
-<!--                    var xhr = new window.XMLHttpRequest();-->
-<!--                    xhr.upload.addEventListener("progress", function(evt) {-->
-<!--                        if (evt.lengthComputable) {-->
-<!--                            var percentComplete = ((evt.loaded / evt.total) * 100);-->
-<!--                            $('.bg-blue-500').css('width', percentComplete + '%');-->
-<!--                            $('p.text-sm.text-gray-500').text('Upload progress: ' + Math.round(percentComplete) + '%');-->
-<!--                        }-->
-<!--                    }, false);-->
-<!--                    return xhr;-->
-<!--                },-->
-<!--                url: '/upload',  // the endpoint-->
-<!--                type: 'POST',    // the method-->
-<!--                data: formData,  // the data-->
-<!--                cache: false,-->
-<!--                contentType: false,-->
-<!--                processData: false,-->
-<!--                success: function(response) {-->
-<!--                    // handle success-->
-<!--                    //add a modal with a blue checkmark-->
-<!--                    //redirect to the next page-->
-<!--&lt;!&ndash;                    $("#success-dialog").dialog({&ndash;&gt;-->
-<!--&lt;!&ndash;                        modal: true,&ndash;&gt;-->
-<!--&lt;!&ndash;                        buttons: {&ndash;&gt;-->
-<!--&lt;!&ndash;                            Ok: function() {&ndash;&gt;-->
-<!--&lt;!&ndash;                                $(this).dialog("close");&ndash;&gt;-->
-<!--&lt;!&ndash;                            }&ndash;&gt;-->
-<!--&lt;!&ndash;                        }&ndash;&gt;-->
-<!--&lt;!&ndash;                    });&ndash;&gt;-->
+            var formData = new FormData(this);
+            $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                            $('.bg-blue-500').css('width', percentComplete + '%');
+                            $('p.text-sm.text-gray-500').text('Upload progress: ' + Math.round(percentComplete) + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                success: function(response) {
 
-<!--&lt;!&ndash;                    // Redirect after 2 seconds&ndash;&gt;-->
-<!--&lt;!&ndash;                    setTimeout(function() {&ndash;&gt;-->
-<!--&lt;!&ndash;                        window.location.href = "/";&ndash;&gt;-->
-<!--&lt;!&ndash;                    }, 2000);&ndash;&gt;-->
+                    $("#statusSuccessModal").modal('show');
 
-<!--                },-->
-<!--                error: function(response) {-->
-<!--                    // handle error-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
+                    // handle success
+                    //add a modal with a blue checkmark
+                    //redirect to the next page
+
+
+<!--                    // Redirect after 2 seconds-
+                    setTimeout(function() {
+                        window.location.href = "/";
+                    }, 2000);
+
+                },
+                error: function(response) {
+                    // handle error
+                    $("#statusErrorsModal").modal('show');
+
+                }
+            });
+        });
+    });
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.min.js'></script>
 

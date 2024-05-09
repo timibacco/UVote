@@ -1,5 +1,7 @@
 package votingme.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
@@ -38,6 +40,34 @@ public class Participant implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Role> roles = new ArrayList<>();
+
+
+    @JsonIgnore
+    @OneToOne
+    private Candidate candidateAccount;
+
+    @JsonIgnore
+    @OneToOne
+    private Voter voterAccount;
+
+
+    @JsonIgnore
+    @OneToOne
+    private Organizer organizerAccount;
+
+
+    @JsonProperty("myAccount")
+    public Object fetchAccount() {
+    	if (candidateAccount != null) {
+    		return candidateAccount;
+    	} else if (voterAccount != null) {
+    		return voterAccount;
+    	} else if (organizerAccount != null) {
+    		return organizerAccount;
+    	}
+    	return null;
+    }
+
 
 
 
