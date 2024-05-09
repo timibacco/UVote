@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "email": "testuser@example.com",
+    "password": "password123",
+    "firstname": "Test",
+    "lastname": "User",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      },
+      {
+        "id": 2,
+        "name": "ROLE_ADMIN"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "email": "john.doe@example.com",
+    "password": "doe123",
+    "firstname": "John",
+    "lastname": "Doe",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "email": "jane.smith@example.com",
+    "password": "smith456",
+    "firstname": "Jane",
+    "lastname": "Smith",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      },
+      {
+        "id": 2,
+        "name": "ROLE_ADMIN"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "email": "alex.wong@example.com",
+    "password": "wong789",
+    "firstname": "Alex",
+    "lastname": "Wong",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "email": "emily.chen@example.com",
+    "password": "chen101",
+    "firstname": "Emily",
+    "lastname": "Chen",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      },
+      {
+        "id": 2,
+        "name": "ROLE_ADMIN"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "email": "michael.jackson@example.com",
+    "password": "kingofpop",
+    "firstname": "Michael",
+    "lastname": "Jackson",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "email": "sarah.green@example.com",
+    "password": "green123",
+    "firstname": "Sarah",
+    "lastname": "Green",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "email": "momoh.gaddafi@example.com",
+    "password": "green123",
+    "firstname": "Momoh",
+    "lastname": "Gaddafi",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    ]
+  }
+]

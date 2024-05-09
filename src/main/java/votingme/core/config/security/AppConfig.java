@@ -2,8 +2,8 @@
 //
 //
 //
-//import votingme.core.entity.User;
-//import votingme.core.repository.UserRepository;
+//import votingme.core.entity.ParticipantRepository;
+//import votingme.core.repository.ParticipantRepository;
 //import lombok.RequiredArgsConstructor;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@
 //public class AppConfig {
 //
 //    @Autowired
-//    private final UserRepository repository;
+//    private final ParticipantRepository repository;
 //
 //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        return username -> repository.findByEmail(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//                .orElseThrow(() -> new UsernameNotFoundException("ParticipantRepository not found"));
 //    }
 //
 //    @Bean

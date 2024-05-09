@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Participants</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Demo CSS (No need to include it into your project) -->
+    <link rel="stylesheet" href="./css/demo.css">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+    <!-- Script JS -->
+
+</head>
+<body>
+<header class="bg-blue-500 p-6">
+    <div class="container mx-auto text-center">
+        <a th:href="@{/}">
+        <h1 class="text-4xl text-white font-bold">
+           VoteX</h1>
+        <p class="text-lg text-white mt-2">Empowering Democracy Online and Beyond</p>
+        </a>
+    </div>
+    <!-- Navigation content here -->
+</header>
+<main class="cd__main">
+    <!-- Start DEMO HTML (Use the following code into your project)-->
+    <!--[if lte IE 9]> <style>
+    .path {stroke-dasharray: 0 !important;}
+</style> <![endif]-->
+    <div class="container  p-5">
+    <div class="row">
+
+        <h2 class="text-2xl font-bold mb-5">Upload Participants</h2>
+        <p class="mb-5">Please upload a document containing the participants for the election. Allowed formats: .csv, .xlsx</p>
+
+        <form th:href="@{/upload}" method="POST" enctype="multipart/form-data">
+            <div class="mb-5">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="file">Select file:</label>
+                <input type="file" id="file" name="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-bs-toggle="modal" data-bs-target="#statusSuccessModal">Upload</button>
+        </form>
+
+        <div class="modal fade" id="statusSuccessModal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center p-lg-4">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                            <circle class="path circle" fill="none" stroke="#198754" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                            <polyline class="path check" fill="none" stroke="#198754" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+                        </svg>
+                        <h4 class="text-success mt-3">Oh Yeah!</h4>
+                        <p class="mt-3">Congratulations!You have successfully uploaded.</p>
+                        <button type="button" class="btn btn-sm mt-3 btn-success" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+    </main>
+
+<script>
+<!--    $(document).ready(function() {-->
+<!--        $('form').on('submit', function(e) {-->
+<!--            e.preventDefault();-->
+
+<!--            var formData = new FormData(this);-->
+<!--            $.ajax({-->
+<!--                xhr: function() {-->
+<!--                    var xhr = new window.XMLHttpRequest();-->
+<!--                    xhr.upload.addEventListener("progress", function(evt) {-->
+<!--                        if (evt.lengthComputable) {-->
+<!--                            var percentComplete = ((evt.loaded / evt.total) * 100);-->
+<!--                            $('.bg-blue-500').css('width', percentComplete + '%');-->
+<!--                            $('p.text-sm.text-gray-500').text('Upload progress: ' + Math.round(percentComplete) + '%');-->
+<!--                        }-->
+<!--                    }, false);-->
+<!--                    return xhr;-->
+<!--                },-->
+<!--                url: '/upload',  // the endpoint-->
+<!--                type: 'POST',    // the method-->
+<!--                data: formData,  // the data-->
+<!--                cache: false,-->
+<!--                contentType: false,-->
+<!--                processData: false,-->
+<!--                success: function(response) {-->
+<!--                    // handle success-->
+<!--                    //add a modal with a blue checkmark-->
+<!--                    //redirect to the next page-->
+<!--&lt;!&ndash;                    $("#success-dialog").dialog({&ndash;&gt;-->
+<!--&lt;!&ndash;                        modal: true,&ndash;&gt;-->
+<!--&lt;!&ndash;                        buttons: {&ndash;&gt;-->
+<!--&lt;!&ndash;                            Ok: function() {&ndash;&gt;-->
+<!--&lt;!&ndash;                                $(this).dialog("close");&ndash;&gt;-->
+<!--&lt;!&ndash;                            }&ndash;&gt;-->
+<!--&lt;!&ndash;                        }&ndash;&gt;-->
+<!--&lt;!&ndash;                    });&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    // Redirect after 2 seconds&ndash;&gt;-->
+<!--&lt;!&ndash;                    setTimeout(function() {&ndash;&gt;-->
+<!--&lt;!&ndash;                        window.location.href = "/";&ndash;&gt;-->
+<!--&lt;!&ndash;                    }, 2000);&ndash;&gt;-->
+
+<!--                },-->
+<!--                error: function(response) {-->
+<!--                    // handle error-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.min.js'></script>
+
+</body>
+</html>

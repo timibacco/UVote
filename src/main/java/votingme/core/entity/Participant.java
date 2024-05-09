@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Entity
 @RequiredArgsConstructor
 @Table(name = "users")
-public class User implements UserDetails {
+public class Participant implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,7 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
     private String firstname;
     private String lastname;
 
@@ -42,7 +43,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        // List<GrantedAuthority> authorities = new ArrayList<>();
        return roles
                .stream()
                .map(role -> new SimpleGrantedAuthority(role.getName().name()))

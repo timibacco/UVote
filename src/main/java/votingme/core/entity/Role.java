@@ -19,7 +19,7 @@ public class Role {
     private UserType name;
 
 
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    private List<Participant> participants;
 
 }

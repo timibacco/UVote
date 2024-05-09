@@ -2,12 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Join Our Community</title>
+    <title>Create or Join</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+   
+    <!-- Include the Google platform library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <style>
         body {
             background: #f8f9fa;
@@ -51,7 +55,7 @@
             background-color: rgba(255, 255, 255, 0.5); /* white with 50% opacity */
             /* rest of your styles */
         }
-        }
+        
         .error {
             color: #dc3545; /* shade of red */
              font-family: 'Arial', sans-serif;
@@ -73,6 +77,7 @@
               left: 50%; /* Center the loader horizontally */
               top: 50%; /* Center the loader vertically */
               transform: translate(-50%, -50%); /* Compensate for the dimensions of the spinner */
+              size: 0cap;
             }
 
 
@@ -97,8 +102,8 @@
               border: 16px solid #f3f3f3; /* Light grey */
               border-top: 16px solid #3498db; /* Blue */
               border-radius: 50%;
-              width: 120px;
-              height: 120px;
+              width: 30px;
+              height: 30px;
               animation: spin 2s linear infinite;
             }
 
@@ -111,15 +116,21 @@
     </style>
 </head>
 <body>
-
+<header class="bg-blue-500 py-6">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl text-white font-bold">
+            <a th:href="@{/}">VoteX</a></h1>
+        <p class="text-lg text-white mt-2">Empowering Democracy Online and Beyond</p>
+    </div>
+</header>
 <div class="fading-background"></div>
 <div class="container register-container">
     <div class="panel register-panel">
         <div class="panel-heading text-center">
-            <h2>Join Our Community</h2>
+            <h2>Be the Change</h2>
         </div>
         <div class="panel-body">
-            <form id="registerForm" method="post" th:action="@{/register/save}" th:object="${user}">
+            <form id="registerForm" method="post" th:action="@{/register/save}" th:object="${participantRepository}">
 
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
@@ -159,6 +170,7 @@
             <div class="login-links text-center">
                 <a th:href="@{/login}">Already have an account? Sign in here</a>
             </div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
     </div>
 </div>
@@ -243,10 +255,20 @@
             });
             // Prevent the form from actually submitting
             return false;
-            };
+            }
 
         });
     });
 </script>
+<script>
+    function onSignIn(googleUser) {
+      // Get the participantRepository's ID token and basic profile information
+      var profile = googleUser.getBasicProfile();
+      var id_token = googleUser.getAuthResponse().id_token;
+  
+      // Send the ID token to your server for verification
+      // ...
+    }
+  </script>
 </body>
 </html>

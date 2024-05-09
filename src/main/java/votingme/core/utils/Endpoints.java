@@ -7,6 +7,8 @@ public class Endpoints {
                     "/",
                     "/register",
                     "/register/**",
+                    "/admin/**",
+                    "/upload",
 
 
 

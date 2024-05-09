@@ -17,7 +17,7 @@ public class Candidate {
 
 
     @OneToOne
-    private User user;
+    private Participant participant;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Election> election;

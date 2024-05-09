@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>VoteX</title>
@@ -12,7 +12,8 @@
 
 <header class="bg-blue-500 py-6">
     <div class="container mx-auto text-center">
-        <h1 class="text-4xl text-white font-bold">VoteX</h1>
+        <h1 class="text-4xl text-white font-bold">
+            <a th:href="@{/}">VoteX</a></h1>
         <p class="text-lg text-white mt-2">Empowering Democracy Online and Beyond</p>
     </div>
 </header>
@@ -46,7 +47,7 @@
             </div>
             <div>
                 <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0">
-                    Manage Election
+                    About Us
                 </a>
             </div>
         </div>

@@ -18,7 +18,7 @@ public class Voter {
 
 
     @OneToOne
-    private User user;
+    private Participant participant;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Election election;
